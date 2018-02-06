@@ -1,0 +1,49 @@
+html,body{
+	height: 89%;
+}
+div{
+	display: inline-block;
+	height: 100%;
+	border: 0;
+	background-color: #1D2F7A;
+	margin: 0;
+	height: 100%;
+	width: 15%;
+}
+div a{
+	color: #fff;
+	text-decoration: none;
+	padding: 10px auto 10px auto;
+	margin: auto 100;
+	width: 100%;
+}
+div a:hover{
+	color: #fff;
+	font-weight: bold;
+	text-decoration: none;
+	padding: 10px;
+}
+.left{
+	float: left;
+}
+.right{
+	float: right;
+	width: 65%;
+	background-color: #fff;
+}
+.rightr{
+	float: right;
+	width:20%;
+	background-color: white;
+}
+fieldset{
+	border:1px solid;
+	margin: 0;
+}
+legend{
+	align: center;
+}
+iframe{
+	margin:0 auto 0 auto;
+	padding: 0;
+}
