@@ -47,3 +47,12 @@ iframe{
 	margin:0 auto 0 auto;
 	padding: 0;
 }
+form>p{
+	font-family: sans-serif;
+	color: blue;
+}
+form input[type='submit']{
+	color: #fff;
+	background-color: blue;
+	border-radius: 100px;
+}

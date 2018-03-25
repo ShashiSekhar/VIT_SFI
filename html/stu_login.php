@@ -44,6 +44,7 @@ if(isset($_POST['reg'])){
 	<title>SFI(Student Login)</title>
 	<link rel="stylesheet" href="../css/topbar.css">
 	<link rel="stylesheet" href="../css/login.css">
+	<!-- <link rel="stylesheet" href="../css/home.css"> -->
 </head>
 <body>
 	<ul>
@@ -54,7 +55,7 @@ if(isset($_POST['reg'])){
 		<ul>
 			<li><input type="submit" name="login" value="Log In"></li>
 			<li><input type="password" name="pass" placeholder="Password" required></li>
-			<li><input type="text" name="rgno" placeholder="Registration Number" pattern="[1][3-7][a-zA-z]{3}[1-9][0-9]{3}" autofocus required></li>
+			<li><input type="text" name="rgno" placeholder="Registration Number" pattern="[1][3-7][a-zA-Z]{3}[1-9][0-9]{3}" autofocus required></li>
 		</ul>
 	</form>
 	<br>
@@ -65,12 +66,11 @@ if(isset($_POST['reg'])){
 		<fieldset>
 			<h1>New Here?</h1>
 			<input type="text" name="name" placeholder="Name" required>
-			<input type="text" name="regno" pattern="[1][3-7][a-zA-z]{3}[1-9][0-9]{3}" placeholder="Registration Number" required>
+			<input type="text" name="regno" pattern="[1][3-7][a-zA-Z]{3}[1-9][0-9]{3}" placeholder="Registration Number" required>
 			<input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="Email ID" required>
 			<input type="password" name="regpass" placeholder="Password" required>
 			<input type="password" name="regrpass" placeholder="Retype Password" required><br>
 			<input type="submit" name="reg" value="Register">
-			<?php echo isset($_POST['reg']); ?>
 
 		</fieldset>
 	</form>

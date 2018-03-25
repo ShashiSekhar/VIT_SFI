@@ -2,14 +2,15 @@
 session_start();
 require 'dbcon.php';
 if(isset($_POST['login'])){
-	$rgno = $_POST['rgno'];
+	$fcid = $_POST['fcid'];
 	$pass = $_POST['pass'];
-	if($rgno == NULL || $pass == NULL)
+	$_SESSION['u']='f';
+	if($fcid == NULL || $pass == NULL)
 	{
-		$err = "Registration Number or Password cannot be left blank";
+		$err = "Faculty ID or Password cannot be left blank";
 		header("Location:".$_SERVER['PHP_SELF']);
 	}
-	$sql = "SELECT `password` FROM `stlogin` WHERE rgno = '$rgno'";
+	$sql = "SELECT `password` FROM `fclogin` WHERE fcid = '$fcid'";
 	$res = $conn->query($sql) or die('Error connecting');
 	$a = $res->fetch_assoc();
 	$b = $a['password'];
@@ -17,22 +18,24 @@ if(isset($_POST['login'])){
 		$err = "No such User found. Please Register first.";
 	}
 	elseif ($pass == $b) {
-		$_SESSION['rgno'] = $rgno;
+		$_SESSION['fcid'] = $fcid;
 		header("Location:home.php");
 	}
 }
 if(isset($_POST['reg'])){
 	$name = $_POST['name'];
-	$rgno = $_POST['regno'];
+	$fcid = $_POST['fcid'];
 	$email = $_POST['email'];
 	$pass = $_POST['regpass'];
 	$rpass = $_POST['regrpass'];
 	if($rpass != $pass)
 		$err = "Passwords don't match!";
-	$sql = "INSERT INTO `stlogin` (`rgno`, `password`) VALUES ('$rgno', '$pass') ";
-	$sql2 = "INSERT INTO `student` (`rgno`, `name`, `email`) VALUES ('$rgno', '$name', '$email') ";
+	$sql = "INSERT INTO `fclogin` (`fcid`, `password`) VALUES ('$fcid', '$pass') ";
+	$sql2 = "INSERT INTO `track` (`fcid`, `status`, `message`) VALUES ('$fcid', '1', '') ";
+	$sql3 = "INSERT INTO `faculty` (`fcid`, `name`, `email`) VALUES ('$fcid', '$name', '$email') ";
 	$conn->query($sql) or die($conn->error);
 	$conn->query($sql2) or die($conn->error);
+	$conn->query($sql3) or die($conn->error);
 }
 ?>
 
@@ -40,20 +43,20 @@ if(isset($_POST['reg'])){
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>SFI(Student Login)</title>
+	<title>SFI(Faculty Login)</title>
 	<link rel="stylesheet" href="../css/topbar.css">
 	<link rel="stylesheet" href="../css/login.css">
 </head>
 <body>
 	<ul>
 		<li style="float: left; padding: 10px;"><img src="../images/vit.png" alt="logo" height="70px"></li>
-		<li style="text-align: center; float: none;"><p>Student Faculty Interface(Student)<br>VIT CHENNAI</p></li>
+		<li style="text-align: center; float: none;"><p>Student Faculty Interface(Faculty)<br>VIT CHENNAI</p></li>
 	</ul>
 	<form name="login" action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
 		<ul>
 			<li><input type="submit" name="login" value="Log In"></li>
 			<li><input type="password" name="pass" placeholder="Password" required></li>
-			<li><input type="text" name="rgno" placeholder="Registration Number" pattern="[1][3-7][a-zA-z]{3}[1-9][0-9]{3}" autofocus required></li>
+			<li><input type="text" name="fcid" placeholder="Faculty ID" pattern="[0-9]{5}" autofocus required></li>
 		</ul>
 	</form>
 	<br>
@@ -64,12 +67,11 @@ if(isset($_POST['reg'])){
 		<fieldset>
 			<h1>New Here?</h1>
 			<input type="text" name="name" placeholder="Name" required>
-			<input type="text" name="regno" pattern="[1][3-7][a-zA-z]{3}[1-9][0-9]{3}" placeholder="Registration Number" required>
+			<input type="text" name="fcid" pattern="[0-9]{5}" placeholder="Faculty ID" required>
 			<input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="Email ID" required>
 			<input type="password" name="regpass" placeholder="Password" required>
 			<input type="password" name="regrpass" placeholder="Retype Password" required><br>
 			<input type="submit" name="reg" value="Register">
-			<?php echo isset($_POST['reg']); ?>
 
 		</fieldset>
 	</form>
